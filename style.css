@@ -1,3 +1,8 @@
+/* google font  */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+   font-family: 'Poppins', sans-serif !important;
+}
 .gizzard{
     width: 2.5rem;
 }
@@ -11,3 +16,11 @@ border-radius: 0px 0px 240px 240px;
 /* #searchInput:focus{
 outline: 0px;
 } */
+/* .mainSection{
+    background-color: blue;
+} */
+
+.mainSection{
+border-radius:240px 240px 0px 0px ;
+background-image: linear-gradient(#f8f9fa,white) ;
+}

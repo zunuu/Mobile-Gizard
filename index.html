@@ -18,23 +18,26 @@
 </head>
 
 <body class="container">
-    <header class="bg-light  pt-4 pb-5 text-center headerSection">
+    <header class="fw-bold bg-light  pt-4 pb-5 text-center headerSection">
         <h1>Mobile Giz<span><img class="gizzard" src="./icons/thunderbolt.png" alt=""></span>ard</h1>
         <nav class="navbar navbar-light ">
             <div class="d-flex mx-auto w-75">
 
                 <input class="form-control me-2 " id="searchInput" type="search" placeholder="Search"
                     aria-label="Search">
-                <button class="btn btn-outline-success d-flex rounded-5" id="searchButton" type="submit">Search <span
-                        class=" ps-2"><img class="w-50" src="./icons/loupe.png" alt=""></span>
+                <button onclick="searchMobile()" class="btn btn-outline-success d-flex rounded-5" id="searchButton"
+                    type="submit">Search <span class=" ps-2"><img class="w-50" src="./icons/loupe.png" alt=""></span>
                 </button>
             </div>
         </nav>
     </header>
 
-
-    <main class="bg-light">
+    <!-- Result Section -->
+    <main class=" mainSection">
         <section id="mobileDetails">
+
+        </section>
+        <section id="error" class="errorSection">
 
         </section>
 
