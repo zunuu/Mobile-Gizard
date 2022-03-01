@@ -1,0 +1,13 @@
+.gizzard{
+    width: 2.5rem;
+}
+.headerSection{
+border-radius: 0px 0px 240px 240px;
+
+}
+#searchInput,#searchButton{
+     border-radius: 50px ; 
+}
+/* #searchInput:focus{
+outline: 0px;
+} */
