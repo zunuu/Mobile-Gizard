@@ -1,9 +1,12 @@
 let allMobiles = document.getElementById('allMobiles')
-let sensorsSection = document.getElementById('sensorsSection')
 
+
+// sensor info reset 
+let sensorsSection = document.getElementById('sensorsSection')
 const resetSensor = () => {
     sensorsSection.innerText = ""
 }
+
 let noResultMessage = document.getElementById('noResult')
 const searchButton = document.getElementById('searchButton');
 const searchMobile = () => {
@@ -13,12 +16,12 @@ const searchMobile = () => {
 
 
 
-
+    //reset
     allMobiles.innerHTML = ""
     errorMessage.innerText = ""
 
 
-    // error checking
+    // condition for no input
     if (inputValue == "") {
         noResultMessage.innerHTML = ""
         let ErrorSection = document.createElement('div')
@@ -27,19 +30,18 @@ const searchMobile = () => {
         errorMessage.appendChild(ErrorSection)
 
     }
-    // API calling 
 
 
+    //condition for results either found or not + API calling//
     else {
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
             .then(data => displayMobile(data.data))
 
-        // input.value =""; resets the input value in search box
+        //  resets the input value in search box
         input.value = "";
 
 
-        // console.log(displayMobile)
 
 
 
@@ -49,31 +51,35 @@ const searchMobile = () => {
 
 
 }
-const displayMobile = allPhones => {
 
+
+// APIs function
+
+const displayMobile = allPhones => {
+    // condition for no result found
     if (allPhones.length == 0) {
         noResultMessage.innerHTML = ""
         let NoResultSection = document.createElement('div')
 
-        NoResultSection.innerHTML = `<div class=" p-5 text-center my-5 " ><h1>No Result Found </h1></div>`
+
+        // no result message 
+        NoResultSection.innerHTML = `
+        <div class=" p-5 text-center my-5 " >
+            <h1>No Result Found </h1>
+        </div>
+        `
         noResultMessage.appendChild(NoResultSection)
 
 
     }
+    // condition for all devices found
     else {
         noResultMessage.innerHTML = ""
 
 
 
-        // let allMobiles = document.getElementById('allMobiles')
         allPhones.slice(1, 21).forEach(eachPhone => {
-            // console.log(eachPhone.brand)
-            // console.log(eachPhone.phone_name)
-            // console.log(eachPhone.image)
-            // if (allPhones.innerText == "") {
-            //     console.log("kalloooooooo")
-            // }
-            // console.log(eachPhone)
+
 
             let newMobile = document.createElement('div');
 
@@ -109,62 +115,36 @@ const displayMobile = allPhones => {
     }
 
 }
-// for (const eachPhone of allPhones) {
-//     
-// }
+
+
+// getting slug as id to show the details of every individual device///// 
 
 const mobileDetailsButton = (slug) => {
-    // console.log(slug)
-    // const phoneName = document.getElementById('nameOfPhone')
-    // phoneName.innerText= `${}`
-    // const idEachMobiles =document.getElementById('')
+
     fetch(`https://openapi.programming-hero.com/api/phone/${slug}`)
         .then(res => res.json())
         .then(data => MobileDetails(data.data))
 }
 
 const MobileDetails = details => {
-    // console.log(details.brand)
-    // console.log(details.image)
-    // // console.log(details.name)
 
-
-    // console.log(details.mainFeatures)
 
 
     const sensors = details.mainFeatures.sensors
-    // const otherDetails = details.others
-    // console.log(otherDetails)
 
-
+    // sensors details 
     for (eachSensor of sensors) {
         const each = document.createElement('li')
         each.innerText = eachSensor
-        // sensorsSection.innerText = each.innerText
         sensorsSection.appendChild(each)
 
 
     }
 
 
-    // console.log(details.releaseDate)
-    // console.log(details.slug)
-    // console.log(details)
-    // for (MobileFullDetails in details) {
-    //     // console.log(MobileFullDetails)
-
-    //     const eachMobileFullDetails = (details[MobileFullDetails])
-    //     // console.log(eachMobileFullDetails)
-
-
-
-    //     displayMobileDetails.innerText = eachMobileFullDetails
-    //     const mobileDetailsInner = displayMobileDetails.innerText;
-    //     // console.log(mobileDetailsInner)
-    // }
-
+    // Devices Details 
     const displayMobileDetails = document.getElementById('displayDetails')
-
+    // detailn in modal 
     displayMobileDetails.innerHTML = `
     <div class="d-flex align-items-center ">
             <img class="w-25 rounded-3 bg-success bg-gradient p-1 bg-opacity-25 " src="${details.image}"> 

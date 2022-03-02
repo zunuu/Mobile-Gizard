@@ -3,6 +3,9 @@
 body{
    font-family: 'Poppins', sans-serif !important;
 }
+
+
+/* site name customize  */
 .gizzard{
     width: 2.5rem;
 }
@@ -10,21 +13,17 @@ body{
 border-radius: 0px 0px 240px 240px;
 
 }
+/* search nav  */
 #searchInput,#searchButton{
      border-radius: 50px ; 
 }
-/* #searchInput:focus{
-outline: 0px;
-} */
-/* .mainSection{
-    background-color: blue;
-} */
+
 
 .mainSection{
 border-radius:240px 240px 0px 0px ;
 background-image: linear-gradient(#fff4f6,white) ;
 }
-
+/* no input section */
 .errorSection{
     border-radius:240px 240px 0px 0px ;
 background-image: linear-gradient(#e1e6eb,white) ;
@@ -33,6 +32,9 @@ background-image: linear-gradient(#e1e6eb,white) ;
     border-radius:240px 240px 0px 0px ;
 background-image: linear-gradient(#ccccbb,white) ;
 }
+
+
+/* details of mobiles  */
 .modal-content{
     background-image:url(./pexels-moose-photos-1038001.jpg);
     background-repeat:no-repeat ;
