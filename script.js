@@ -5,7 +5,7 @@ const searchMobile = () => {
     let inputValue = input.value;
     let errorMessage = document.getElementById('error')
     errorMessage.innerText = ""
-    // console.log(inputValue)
+    // error checking
     if (inputValue == "") {
 
         let ErrorSection = document.createElement('div')
@@ -14,12 +14,13 @@ const searchMobile = () => {
         errorMessage.appendChild(ErrorSection)
 
     }
+    // API calling 
     else {
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
             .then(data => displayMobile(data.data))
         input.value = "";
-        // console.log(inputValue)
+        // input.value =""; resets the input value in search box
 
     }
 
@@ -34,7 +35,7 @@ const displayMobile = allPhones => {
         // console.log(eachPhone.brand)
         // console.log(eachPhone.phone_name)
         // console.log(eachPhone.image)
-        console.log(eachPhone)
+        // console.log(eachPhone)
         const newMobile = document.createElement('div');
 
         newMobile.innerHTML = `
@@ -47,7 +48,7 @@ const displayMobile = allPhones => {
                 <li class="list-group-item rounded-3 bg-danger bg-gradient bg-opacity-25 text-dark"><strong>${eachPhone.phone_name}</strong></li>
                 <li class="list-group-item bg-white p-0 pt-1 bg-gradient   bg-opacity-25 text-dark">
                     
-                        <button type="button" class="px-4 rounded-pill btn btn-primary" data-bs-toggle="modal"  data-bs-target="#exampleModal">
+                        <button type="button" class="px-4 rounded-pill btn btn-primary" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" onclick="mobileDetails()">
                            
                               See Details
                            
@@ -65,4 +66,55 @@ const displayMobile = allPhones => {
 
 
 
+}
+const mobileDetails = () => {
+    // const phoneName = document.getElementById('nameOfPhone')
+    // phoneName.innerText= `${}`
+    // const idEachMobiles =document.getElementById('')
+    fetch('https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089')
+        .then(res => res.json())
+        .then(data => MobileDetails(data.data))
+}
+
+const MobileDetails = details => {
+    console.log(details.brand)
+    console.log(details.image)
+    console.log(details.mainFeatures)
+    console.log(details.name)
+    console.log(details.others)
+    console.log(details.releaseDate)
+    console.log(details.slug)
+    console.log(details)
+    // for (MobileFullDetails in details) {
+    //     // console.log(MobileFullDetails)
+
+    //     const eachMobileFullDetails = (details[MobileFullDetails])
+    //     // console.log(eachMobileFullDetails)
+
+
+
+    //     displayMobileDetails.innerText = eachMobileFullDetails
+    //     const mobileDetailsInner = displayMobileDetails.innerText;
+    //     // console.log(mobileDetailsInner)
+    // }
+
+    const displayMobileDetails = document.getElementById('displayDetails')
+    displayMobileDetails.innerHTML = `
+    <div class="d-flex">
+            <img class="w-25" src="${details.image}"> 
+            <p>
+               <b> ${details.name} </b>
+                <br>
+               <small>Release Date: ${details.releaseDate}</small>
+                <br>      
+               <strong>Brand Name: ${details.brand}</strong>
+
+            </p> 
+    </div>
+  
+
+    <p>Brand Name: ${details.mainFeatures}</p>
+    <p>Brand Name: ${details.others}</p>
+    <small>Brand Name: ${details.slug}</small>
+    `
 }
