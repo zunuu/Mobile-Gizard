@@ -1,10 +1,13 @@
 const searchButton = document.getElementById('searchButton');
 const searchMobile = () => {
-
     const input = document.getElementById('searchInput')
     let inputValue = input.value;
     let errorMessage = document.getElementById('error')
+    allMobiles.innerHTML = ""
     errorMessage.innerText = ""
+    // noResultMessage.innerText = ""
+    // NoResultSection.innerText = ""
+
     // error checking
     if (inputValue == "") {
 
@@ -19,57 +22,80 @@ const searchMobile = () => {
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
             .then(data => displayMobile(data.data))
-        input.value = "";
-        // input.value =""; resets the input value in search box
 
+
+
+
+        // input.value =""; resets the input value in search box
+        input.value = "";
     }
 
 }
 const displayMobile = allPhones => {
+    // NoResultSection.innerHTML = ""
+    // noResultMessage.innerText = ""
+    // NoResultSection.innerText = ""
+    let noResultMessage = document.getElementById('noResult')
 
-    // for (const eachPhone of allPhones) {
-    //     
-    // }
-    const allMobiles = document.getElementById('allMobiles')
-    allPhones.forEach(eachPhone => {
-        // console.log(eachPhone.brand)
-        // console.log(eachPhone.phone_name)
-        // console.log(eachPhone.image)
-        // console.log(eachPhone)
+    if (allPhones.length == 0) {
+        let NoResultSection = document.createElement('div')
 
-        const newMobile = document.createElement('div');
+        NoResultSection.innerHTML = `<div class=" p-5 text-center my-5 " ><h1>No Result Found </h1></div>`
+        noResultMessage.appendChild(NoResultSection)
 
-        newMobile.innerHTML = `
-        
-        <div class="border border-5 border-white mx-auto bg-transparent rounded-3 shadow-lg" style="width: 10rem;">
-            <img src="${eachPhone.image}" class="card-img-top rounded-3 w-100" alt="...">
+
+    }
+    else {
+        // NoResultSection.innerHTML = ""
+        let allMobiles = document.getElementById('allMobiles')
+        allPhones.forEach(eachPhone => {
+            // console.log(eachPhone.brand)
+            // console.log(eachPhone.phone_name)
+            // console.log(eachPhone.image)
+            // if (allPhones.innerText == "") {
+            //     console.log("kalloooooooo")
+            // }
+            // console.log(eachPhone)
+
+            let newMobile = document.createElement('div');
+
+            newMobile.innerHTML = `
             
-            <ul class="list-group bg-transparent rounded-3 list-group-flush">
-                <li class="list-group-item rounded-3 bg-info bg-gradient bg-opacity-25 text-dark">${eachPhone.brand}</li>
-                <li class="list-group-item rounded-3 bg-danger bg-gradient bg-opacity-25 text-dark"><strong>${eachPhone.phone_name}</strong></li>
+            <div class="border border-5 border-white mx-auto bg-transparent rounded-3 shadow-lg" style="width: 10rem;">
+                <img src="${eachPhone.image}" class="card-img-top rounded-3 w-100" alt="...">
                 
-                <li class="list-group-item bg-white p-0 pt-1 bg-gradient   bg-opacity-25 text-dark">
+                <ul class="list-group bg-transparent rounded-3 list-group-flush">
+                    <li class="list-group-item rounded-3 bg-info bg-gradient bg-opacity-25 text-dark">${eachPhone.brand}</li>
+                    <li class="list-group-item rounded-3 bg-danger bg-gradient bg-opacity-25 text-dark"><strong>${eachPhone.phone_name}</strong></li>
                     
-                        <button type="button" class="px-4 rounded-pill btn btn-primary" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" onclick="mobileDetails('${eachPhone.slug}')">
-                           
-                              See Details
-                           
-                        </button>
-                  
-                </li>
-            </ul>
+                    <li class="list-group-item bg-white p-0 pt-1 bg-gradient   bg-opacity-25 text-dark">
+                        
+                            <button type="button" class="px-4 rounded-pill btn btn-primary" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" onclick="mobileDetailsButton('${eachPhone.slug}')">
+                               
+                                  See Details
+                               
+                            </button>
+                      
+                    </li>
+                </ul>
+               
+            </div>
            
-        </div>
-       
-        `
-        newMobile.classList.add("col-xl-4", "p-5", "my-5", "bg-transparent", "text-center")
-        allMobiles.appendChild(newMobile);
-    })
+            `
+            newMobile.classList.add("col-xl-4", "p-5", "my-5", "bg-transparent", "text-center")
+            allMobiles.appendChild(newMobile);
+        })
 
 
+
+    }
 
 }
-const mobileDetails = (slug) => {
+// for (const eachPhone of allPhones) {
+//     
+// }
+
+const mobileDetailsButton = (slug) => {
     // console.log(slug)
     // const phoneName = document.getElementById('nameOfPhone')
     // phoneName.innerText= `${}`
