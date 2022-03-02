@@ -1,3 +1,5 @@
+let allMobiles = document.getElementById('allMobiles')
+let noResultMessage = document.getElementById('noResult')
 const searchButton = document.getElementById('searchButton');
 const searchMobile = () => {
     const input = document.getElementById('searchInput')
@@ -10,7 +12,7 @@ const searchMobile = () => {
 
     // error checking
     if (inputValue == "") {
-
+        noResultMessage.innerHTML = ""
         let ErrorSection = document.createElement('div')
 
         ErrorSection.innerHTML = `<div class="p-5 text-center my-5"><h1>Please search with a name </h1></div>`
@@ -18,26 +20,37 @@ const searchMobile = () => {
 
     }
     // API calling 
+
+
     else {
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
             .then(data => displayMobile(data.data))
 
-
-
-
         // input.value =""; resets the input value in search box
         input.value = "";
+
+
+        // console.log(displayMobile)
+
+
+
+
     }
+
+
 
 }
 const displayMobile = allPhones => {
     // NoResultSection.innerHTML = ""
     // noResultMessage.innerText = ""
     // NoResultSection.innerText = ""
-    let noResultMessage = document.getElementById('noResult')
+    // console.log(allPhones)
+
+    // let noResultMessage = document.getElementById('noResult')
 
     if (allPhones.length == 0) {
+        noResultMessage.innerHTML = ""
         let NoResultSection = document.createElement('div')
 
         NoResultSection.innerHTML = `<div class=" p-5 text-center my-5 " ><h1>No Result Found </h1></div>`
@@ -46,8 +59,11 @@ const displayMobile = allPhones => {
 
     }
     else {
-        // NoResultSection.innerHTML = ""
-        let allMobiles = document.getElementById('allMobiles')
+        noResultMessage.innerHTML = ""
+
+
+
+        // let allMobiles = document.getElementById('allMobiles')
         allPhones.forEach(eachPhone => {
             // console.log(eachPhone.brand)
             // console.log(eachPhone.phone_name)
@@ -108,9 +124,47 @@ const mobileDetailsButton = (slug) => {
 const MobileDetails = details => {
     // console.log(details.brand)
     // console.log(details.image)
+    // // console.log(details.name)
+
+
     // console.log(details.mainFeatures)
-    // console.log(details.name)
-    // console.log(details.others)
+
+
+    const sensors = details.mainFeatures.sensors
+    // const otherDetails = details.others
+    // console.log(otherDetails)
+
+
+    for (eachSensor of sensors) {
+        const each = document.createElement('li')
+        each.innerText = eachSensor
+        sensorsSection = document.getElementById('sensorsSection')
+        // sensorsSection.innerText = each.innerText
+        sensorsSection.appendChild(each)
+    }
+    // for (eachDetail in otherDetails) {
+    //     const each = document.createElement('li')
+    //     eachDetail.innerText = eachDetail
+    //     otherDetailSection = document.getElementById('otherDetailSection')
+    //     // sensorsSection.innerText = each.innerText
+    //     otherDetailSection.appendChild(each)
+    //     // console.log(each)
+
+
+    // }
+    // const otherInfos = Object.entries(otherDetails)
+    // // console.log(otherInfos)
+    // for (eachInfoDetail of otherInfos) {
+    //     // console.log(eachInfoDetail)
+    //     for (eachInfo of eachInfoDetail) {
+    //         console.log(eachInfo)
+    //     }
+
+
+    // }
+
+
+
     // console.log(details.releaseDate)
     // console.log(details.slug)
     // console.log(details)
@@ -130,12 +184,15 @@ const MobileDetails = details => {
     const displayMobileDetails = document.getElementById('displayDetails')
     displayMobileDetails.innerHTML = `
     <div class="d-flex">
-            <img class="w-25" src="${details.image}"> 
+            <img class="w-25 p-2" src="${details.image}"> 
             <p class="ps-3">
 
-               <b>Model:
+               <span class="fs-3">
+                   <b>Model:
                    ${details.name} 
-               </b>
+                   </b>
+               </span>
+
                     <br>
                <small id="date">${details.releaseDate}</small>
                     <br>      
@@ -147,18 +204,41 @@ const MobileDetails = details => {
     </div>
   
 
-    <p>Brand Name: ${details.mainFeatures}</p>
-    <p>Brand Name: ${details.others}</p>
-    <small>Brand Name: ${details.slug}</small>
-    `
+    <div class="py-3">
+    <p>chipSet: ${details.mainFeatures.chipSet}</p>
+    <p>memory: ${details.mainFeatures.memory}</p>
+    <p>storage: ${details.mainFeatures.storage}</p>
+    </div>
 
+
+    <h5>Others Detail</h5>
+    <hr>
+    <p>Bluetooth: ${details.others.Bluetooth}</p>
+    <p>GPS: ${details.others.GPS}</p>
+    <p>Radio: ${details.others.NFC}</p>
+    <p>Radio: ${details.others.Radio}</p>
+    <p>USB: ${details.others.USB}</p>
+    <p>WLAN: ${details.others.WLAN}</p>
+    
+    `
     // condition for no release date of phones 
     const date = document.getElementById('date')
     if (date.innerText == "") {
         date.innerText = "No Release Date Found"
 
     }
-
+    // GPS: "Yes, with A-GPS, GLONASS, GALILEO, BDS"
+    // NFC: "Yes"
+    // Radio: "No"
+    // USB: "USB Type-C 2.0, USB On-The-Go"
+    // WLAN: "Wi-Fi 802.11 a/b/g/n/ac, dual-band, Wi-Fi Direct, hotspot"
 
     // console.log(details.releaseDate)
 }
+
+// x = { a: 56, b: 555, c: 666 }
+// for (xs in x) {
+
+//     console.log(x[xs])
+
+// }
