@@ -36,6 +36,7 @@ const displayMobile = allPhones => {
         // console.log(eachPhone.phone_name)
         // console.log(eachPhone.image)
         // console.log(eachPhone)
+
         const newMobile = document.createElement('div');
 
         newMobile.innerHTML = `
@@ -46,9 +47,10 @@ const displayMobile = allPhones => {
             <ul class="list-group bg-transparent rounded-3 list-group-flush">
                 <li class="list-group-item rounded-3 bg-info bg-gradient bg-opacity-25 text-dark">${eachPhone.brand}</li>
                 <li class="list-group-item rounded-3 bg-danger bg-gradient bg-opacity-25 text-dark"><strong>${eachPhone.phone_name}</strong></li>
+                
                 <li class="list-group-item bg-white p-0 pt-1 bg-gradient   bg-opacity-25 text-dark">
                     
-                        <button type="button" class="px-4 rounded-pill btn btn-primary" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" onclick="mobileDetails()">
+                        <button type="button" class="px-4 rounded-pill btn btn-primary" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" onclick="mobileDetails('${eachPhone.slug}')">
                            
                               See Details
                            
@@ -67,24 +69,25 @@ const displayMobile = allPhones => {
 
 
 }
-const mobileDetails = () => {
+const mobileDetails = (slug) => {
+    // console.log(slug)
     // const phoneName = document.getElementById('nameOfPhone')
     // phoneName.innerText= `${}`
     // const idEachMobiles =document.getElementById('')
-    fetch('https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089')
+    fetch(`https://openapi.programming-hero.com/api/phone/${slug}`)
         .then(res => res.json())
         .then(data => MobileDetails(data.data))
 }
 
 const MobileDetails = details => {
-    console.log(details.brand)
-    console.log(details.image)
-    console.log(details.mainFeatures)
-    console.log(details.name)
-    console.log(details.others)
-    console.log(details.releaseDate)
-    console.log(details.slug)
-    console.log(details)
+    // console.log(details.brand)
+    // console.log(details.image)
+    // console.log(details.mainFeatures)
+    // console.log(details.name)
+    // console.log(details.others)
+    // console.log(details.releaseDate)
+    // console.log(details.slug)
+    // console.log(details)
     // for (MobileFullDetails in details) {
     //     // console.log(MobileFullDetails)
 
@@ -102,12 +105,17 @@ const MobileDetails = details => {
     displayMobileDetails.innerHTML = `
     <div class="d-flex">
             <img class="w-25" src="${details.image}"> 
-            <p>
-               <b> ${details.name} </b>
-                <br>
-               <small>Release Date: ${details.releaseDate}</small>
-                <br>      
-               <strong>Brand Name: ${details.brand}</strong>
+            <p class="ps-3">
+
+               <b>Model:
+                   ${details.name} 
+               </b>
+                    <br>
+               <small id="date">${details.releaseDate}</small>
+                    <br>      
+               <strong>Brand:
+                   ${details.brand}
+               </strong>
 
             </p> 
     </div>
@@ -117,4 +125,14 @@ const MobileDetails = details => {
     <p>Brand Name: ${details.others}</p>
     <small>Brand Name: ${details.slug}</small>
     `
+
+    // condition for no release date of phones 
+    const date = document.getElementById('date')
+    if (date.innerText == "") {
+        date.innerText = "No Release Date Found"
+
+    }
+
+
+    // console.log(details.releaseDate)
 }
