@@ -58,14 +58,19 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 id="nameOfPhone"></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button onclick="resetSensor()" type="button" id="detailsClose" class="btn-close"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="displayDetails">
 
                         </div>
-                        <div class="container" id="sensorsSection">
+                        <div class="container">
                             <h5>Sensors</h5>
                             <hr>
+                        </div>
+                        <div class="container bg-light bg-gradient my-2 mb-4 p-3 bg-opacity-75 w-75 rounded"
+                            id="sensorsSection">
+
                         </div>
                         <!-- <div class="container" id="otherDetailSection">
                             <h5>Others</h5>

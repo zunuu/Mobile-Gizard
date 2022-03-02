@@ -33,3 +33,9 @@ background-image: linear-gradient(#e1e6eb,white) ;
     border-radius:240px 240px 0px 0px ;
 background-image: linear-gradient(#ccccbb,white) ;
 }
+.modal-content{
+    background-image:url(./pexels-moose-photos-1038001.jpg);
+    background-repeat:no-repeat ;
+    width: 100%;
+    background-position:center;
+}

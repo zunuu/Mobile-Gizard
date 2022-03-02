@@ -1,14 +1,22 @@
 let allMobiles = document.getElementById('allMobiles')
+let sensorsSection = document.getElementById('sensorsSection')
+
+const resetSensor = () => {
+    sensorsSection.innerText = ""
+}
 let noResultMessage = document.getElementById('noResult')
 const searchButton = document.getElementById('searchButton');
 const searchMobile = () => {
     const input = document.getElementById('searchInput')
     let inputValue = input.value;
     let errorMessage = document.getElementById('error')
+
+
+
+
     allMobiles.innerHTML = ""
     errorMessage.innerText = ""
-    // noResultMessage.innerText = ""
-    // NoResultSection.innerText = ""
+
 
     // error checking
     if (inputValue == "") {
@@ -42,12 +50,6 @@ const searchMobile = () => {
 
 }
 const displayMobile = allPhones => {
-    // NoResultSection.innerHTML = ""
-    // noResultMessage.innerText = ""
-    // NoResultSection.innerText = ""
-    // console.log(allPhones)
-
-    // let noResultMessage = document.getElementById('noResult')
 
     if (allPhones.length == 0) {
         noResultMessage.innerHTML = ""
@@ -64,7 +66,7 @@ const displayMobile = allPhones => {
 
 
         // let allMobiles = document.getElementById('allMobiles')
-        allPhones.forEach(eachPhone => {
+        allPhones.slice(1, 21).forEach(eachPhone => {
             // console.log(eachPhone.brand)
             // console.log(eachPhone.phone_name)
             // console.log(eachPhone.image)
@@ -138,31 +140,11 @@ const MobileDetails = details => {
     for (eachSensor of sensors) {
         const each = document.createElement('li')
         each.innerText = eachSensor
-        sensorsSection = document.getElementById('sensorsSection')
         // sensorsSection.innerText = each.innerText
         sensorsSection.appendChild(each)
+
+
     }
-    // for (eachDetail in otherDetails) {
-    //     const each = document.createElement('li')
-    //     eachDetail.innerText = eachDetail
-    //     otherDetailSection = document.getElementById('otherDetailSection')
-    //     // sensorsSection.innerText = each.innerText
-    //     otherDetailSection.appendChild(each)
-    //     // console.log(each)
-
-
-    // }
-    // const otherInfos = Object.entries(otherDetails)
-    // // console.log(otherInfos)
-    // for (eachInfoDetail of otherInfos) {
-    //     // console.log(eachInfoDetail)
-    //     for (eachInfo of eachInfoDetail) {
-    //         console.log(eachInfo)
-    //     }
-
-
-    // }
-
 
 
     // console.log(details.releaseDate)
@@ -182,10 +164,11 @@ const MobileDetails = details => {
     // }
 
     const displayMobileDetails = document.getElementById('displayDetails')
+
     displayMobileDetails.innerHTML = `
-    <div class="d-flex">
-            <img class="w-25 p-2" src="${details.image}"> 
-            <p class="ps-3">
+    <div class="d-flex align-items-center ">
+            <img class="w-25 rounded-3 bg-success bg-gradient p-1 bg-opacity-25 " src="${details.image}"> 
+            <p class="ps-3 bg-success p-3 bg-opacity-50 bg-gradient mx-1 rounded">
 
                <span class="fs-3">
                    <b>Model:
@@ -204,7 +187,7 @@ const MobileDetails = details => {
     </div>
   
 
-    <div class="py-3">
+    <div class="py-3 bg-warning my-3 p-3 bg-opacity-25 bg-gradient mx-1 rounded">
     <p>chipSet: ${details.mainFeatures.chipSet}</p>
     <p>memory: ${details.mainFeatures.memory}</p>
     <p>storage: ${details.mainFeatures.storage}</p>
@@ -213,32 +196,25 @@ const MobileDetails = details => {
 
     <h5>Others Detail</h5>
     <hr>
+    <div class="bg-info my-1 p-3 bg-opacity-50 bg-gradient mx-1 rounded">
     <p>Bluetooth: ${details.others.Bluetooth}</p>
     <p>GPS: ${details.others.GPS}</p>
     <p>Radio: ${details.others.NFC}</p>
     <p>Radio: ${details.others.Radio}</p>
     <p>USB: ${details.others.USB}</p>
     <p>WLAN: ${details.others.WLAN}</p>
-    
+    </div>
     `
+
+
     // condition for no release date of phones 
     const date = document.getElementById('date')
     if (date.innerText == "") {
         date.innerText = "No Release Date Found"
 
     }
-    // GPS: "Yes, with A-GPS, GLONASS, GALILEO, BDS"
-    // NFC: "Yes"
-    // Radio: "No"
-    // USB: "USB Type-C 2.0, USB On-The-Go"
-    // WLAN: "Wi-Fi 802.11 a/b/g/n/ac, dual-band, Wi-Fi Direct, hotspot"
 
-    // console.log(details.releaseDate)
+
+
 }
 
-// x = { a: 56, b: 555, c: 666 }
-// for (xs in x) {
-
-//     console.log(x[xs])
-
-// }
