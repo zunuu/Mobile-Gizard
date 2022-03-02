@@ -138,7 +138,7 @@ const mobileDetailsButton = (slug) => {
 
 const MobileDetails = details => {
 
-
+    console.log(details)
 
     const sensors = details.mainFeatures.sensors
 
@@ -178,9 +178,10 @@ const MobileDetails = details => {
   
 
     <div class="py-3 bg-warning my-3 p-3 bg-opacity-25 bg-gradient mx-1 rounded">
-    <p>chipSet: ${details.mainFeatures.chipSet}</p>
-    <p>memory: ${details.mainFeatures.memory}</p>
-    <p>storage: ${details.mainFeatures.storage}</p>
+    <p>ChipSet: ${details.mainFeatures.chipSet}</p>
+    <p>Display Size: ${details.mainFeatures.displaySize}</p>
+    <p>Memory: ${details.mainFeatures.memory}</p>
+    <p>Storage: ${details.mainFeatures.storage}</p>
     </div>
 
 
