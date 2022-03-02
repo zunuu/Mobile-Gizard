@@ -7,9 +7,14 @@ const resetSensor = () => {
     sensorsSection.innerText = ""
 }
 
+
 let noResultMessage = document.getElementById('noResult')
 const searchButton = document.getElementById('searchButton');
 const searchMobile = () => {
+
+
+    document.getElementById('spinner').style.display = 'block';
+
     const input = document.getElementById('searchInput')
     let inputValue = input.value;
     let errorMessage = document.getElementById('error')
@@ -28,6 +33,8 @@ const searchMobile = () => {
 
         ErrorSection.innerHTML = `<div class="p-5 text-center my-5"><h1>Please search with a name </h1></div>`
         errorMessage.appendChild(ErrorSection)
+        // spinner on
+        document.getElementById('spinner').style.display = 'none';
 
     }
 
@@ -70,7 +77,8 @@ const displayMobile = allPhones => {
         `
         noResultMessage.appendChild(NoResultSection)
 
-
+        // spinner off
+        document.getElementById('spinner').style.display = 'none';
     }
     // condition for all devices found
     else {
@@ -113,6 +121,8 @@ const displayMobile = allPhones => {
 
 
     }
+    // spinner off 
+    document.getElementById('spinner').style.display = 'none';
 
 }
 
